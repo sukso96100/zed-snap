@@ -11,6 +11,7 @@ confinement: classic # use 'strict' once you have the right plugs and slots
 apps:
   zed:
     command: usr/bin/zed
+    desktop: usr/share/applications/zed.desktop
 parts:
   zed:
     # See 'snapcraft plugins'
@@ -18,6 +19,10 @@ parts:
     source: https://github.com/zed-industries/zed
     source-tag: "v0.149.5"
     source-type: git
+    build-environment:
+      - APP_NAME: Zed
+      - ZED_BUNDLE: "true"
+      - ZED_UPDATE_EXPLANATION: Please use snap to update zed
     build-snaps:
       - rustup
     build-packages:
@@ -43,7 +48,16 @@ parts:
       craftctl default
       rustup update
       cargo build --release --package cli --package zed
+
       mkdir -p ${CRAFT_PART_INSTALL}/usr/bin
       mkdir -p ${CRAFT_PART_INSTALL}/usr/libexec
-      cp target/release/cli ${CRAFT_PART_INSTALL}/usr/bin/zed
-      cp target/release/zed ${CRAFT_PART_INSTALL}/usr/libexec/zed-editor
+      mkdir -p ${CRAFT_PART_INSTALL}/usr/share/icons/
+      mkdir -p ${CRAFT_PART_INSTALL}/usr/share/applications
+
+      cp target/release/cli ${CRAFT_PART_INSTALL}/usr/bin/${SNAPCRAFT_PROJECT_NAME}
+      cp target/release/zed ${CRAFT_PART_INSTALL}/usr/libexec/${SNAPCRAFT_PROJECT_NAME}-editor
+      cp crates/zed/resources/app-icon.png ${CRAFT_PART_INSTALL}/usr/share/icons/${SNAPCRAFT_PROJECT_NAME}.png
+
+      export APP_CLI=${CRAFT_PART_INSTALL}/usr/bin/${SNAPCRAFT_PROJECT_NAME}
+      export APP_ICON=${CRAFT_PART_INSTALL}/usr/share/icons/${SNAPCRAFT_PROJECT_NAME}.png
+      envsubst < "crates/zed/resources/${SNAPCRAFT_PROJECT_NAME}.desktop.in" > ${CRAFT_PART_INSTALL}/usr/share/applications/${SNAPCRAFT_PROJECT_NAME}.desktop
