@@ -6,6 +6,10 @@ summary: A high-performance, multiplayer code editor # 79 char long summary
 description: |
   Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter.
 
+contact: https://github.com/sukso96100/zed-snap/issues
+issues: https://github.com/sukso96100/zed-snap/issues
+source-code: https://github.com/sukso96100/zed-snap/issues
+license: Apache-2.0, GPL-3.0-or-later, AGPL-3.0-or-later
 grade: devel # must be 'stable' to release into candidate/stable channels
 confinement: classic # use 'strict' once you have the right plugs and slots
 apps:
@@ -59,5 +63,5 @@ parts:
       cp crates/zed/resources/app-icon.png ${CRAFT_PART_INSTALL}/usr/share/icons/${SNAPCRAFT_PROJECT_NAME}.png
 
       export APP_CLI=${CRAFT_PART_INSTALL}/usr/bin/${SNAPCRAFT_PROJECT_NAME}
-      export APP_ICON=${CRAFT_PART_INSTALL}/usr/share/icons/${SNAPCRAFT_PROJECT_NAME}.png
+      export APP_ICON=usr/share/icons/${SNAPCRAFT_PROJECT_NAME}.png
       envsubst < "crates/zed/resources/${SNAPCRAFT_PROJECT_NAME}.desktop.in" > ${CRAFT_PART_INSTALL}/usr/share/applications/${SNAPCRAFT_PROJECT_NAME}.desktop
