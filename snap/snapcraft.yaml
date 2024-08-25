@@ -9,8 +9,8 @@ description: |
 contact: https://github.com/sukso96100/zed-snap/issues
 issues: https://github.com/sukso96100/zed-snap/issues
 source-code: https://github.com/sukso96100/zed-snap/issues
-license: Apache-2.0, GPL-3.0-or-later, AGPL-3.0-or-later
-grade: devel # must be 'stable' to release into candidate/stable channels
+license: Apache-2.0 AND GPL-3.0-or-later AND AGPL-3.0-or-later
+grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: classic # use 'strict' once you have the right plugs and slots
 apps:
   zed:
